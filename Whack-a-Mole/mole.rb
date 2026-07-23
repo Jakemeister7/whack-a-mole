@@ -9,3 +9,5 @@ class WhackaMole < Gosu::Window
 end
 
 Window = WhackaMole
+Window.show_exceptions
+
