@@ -11,16 +11,29 @@ class WhackaMole < Gosu::Window
 		@height = 75
 		@velocity_x = 2
 		@velocity_y = 2
-		@visible = 0
+		@visible = 100
 		@hammer = Gosu::Image.new('images/hammer.png')
+		@hit = 0
+		@font = Gosu::Font.new(30)
+		@score = 0
 	end
 
 	def draw
 		if @visible > 0
 		@image.draw(@x - @width /2, @y - @height / 2, 1)
 		end
+		
+		if @hit == 0
+			c = Gosu::Color::NONE
+		elsif @hit == 1
+			c = Gosu::Color::GREEN
+		elsif @hit == -1
+			c = Gosu::Color::RED			
+		end
+		draw_quad(0, 0, c, 800, 0, c, 800, 600, c, 0, 600, c)
 		@hammer.draw(mouse_x - 25, mouse_y - 39, 1)
-
+		@hit = 0
+		@font.draw(@score.to_s, 650, 50, 2)
 	end
 
 	def update
@@ -33,6 +46,17 @@ class WhackaMole < Gosu::Window
 
 	end
 
+	def button_down(id)
+		if (id == Gosu::MsLeft)
+			if Gosu.distance(mouse_x, mouse_y, @x, @y) < 50 && @visible >= 0
+				@hit = 1
+				@score += 10
+			else
+				@hit = -1
+				@score -= 3
+			end
+		end
+	end
 end
 
 Window = WhackaMole.new
