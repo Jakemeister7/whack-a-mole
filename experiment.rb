@@ -1,6 +1,5 @@
-my_hash = {
-	"a random word" => "ahoy",
-	"Dorothy's math test score" => 94,
-	"an array" => [1, 2, 3],
-	"an empty hash within a hash" => {}
-}
+x = return_squared(20)
+y = 100
+sum = x + y
+puts "The sum of #{x} and #{y} is #{sum}."
+
